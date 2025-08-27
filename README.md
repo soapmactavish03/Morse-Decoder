@@ -1,36 +1,36 @@
 Morse Decoder with Arduino and I2C LCD
 
-This project implements a real-time Morse code decoder using an Arduino and a 16x2 I2C LCD. The system detects button presses to interpret dots (.) and dashes (-) as letters and words, displays decoded text on the LCD, and includes a fast-press reset feature to clear the display.
+A real-time Morse code decoder using an Arduino and a 16x2 I2C LCD. Decode dots (.) and dashes (-) from a button, display letters and words, and reset the display with rapid presses.
 
-Features
+🌟 Features
 
-Decode dots (.) and dashes (-) from button input.
+Decode dots (.) and dashes (-) into letters and numbers.
 
-Letter and word spacing automatically detected.
-			
-Output displayed on a 16x2 I2C LCD, scrolling for long text.
+Automatic letter and word spacing detection.
 
-Fast-press reset: rapidly pressing the button 5–7 times clears the display.
+Output displayed on a 16x2 I2C LCD, with scrolling for long text.
+
+Fast-press reset: Press the button 5–7 times quickly to clear display.
 
 Supports letters A–Z and numbers 0–9.
 
 Easily extendable for punctuation or special symbols.
 
-Components
+📦 Components
 
 Arduino Uno / Nano / Mega
 
 Push button
 
-16x2 I2C LCD
+16x2 I2C LCD (HD44780 with I2C backpack)
 
-10kΩ resistor (for pull-down, if needed)
-
-An active piezo-buzzer for sound cues
+10kΩ resistor (pull-down if needed)
 
 Breadboard and jumper wires
 
-Wiring
+Active Buzzer for sound cues
+
+🔌 Wiring
 
 Button:
 
@@ -50,57 +50,72 @@ SDA → A4 (Arduino Uno/Nano)
 
 SCL → A5 (Arduino Uno/Nano)
 
-Note: Adjust SDA and SCL pins for different Arduino boards.
+Adjust SDA/SCL for different boards.
 
-Code Overview
+🗂 Folder Structure
+MorseDecoder/
+├─ src/
+│  └─ MorseDecoder.ino      # Arduino sketch
+├─ README.md                # Project README
+├─ LICENSE                  # MIT License
+└─ libraries/               # Optional local libraries
 
-Morse input detection: Uses analogRead() on a button.
+💻 Code Overview
 
-Timing: Uses millis() to measure press duration (dot vs dash) and hold duration (letter/word gap).
+Button input: Uses analogRead() to detect dots and dashes.
 
-Decoder: Converts dot/dash sequences into letters and numbers.
+Timing: millis() measures press duration (dot/dash) and hold duration (letter/word gap).
 
-Display: Prints decoded text to a 16x2 I2C LCD, scrolling if longer than 16 characters.
+Decoder: Converts Morse sequences into letters and numbers.
 
-Reset feature: Rapid repeated presses clear the display without registering extra dots.
+Display: Shows decoded text on 16x2 I2C LCD with scrolling for long messages.
 
-Usage
+Reset: Rapid repeated presses clear the display without registering extra dots.
 
-Connect the hardware as described in the wiring section.
+⚙️ Usage
 
-Upload the Arduino sketch to your board.
+Connect hardware as described.
+
+Open MorseDecoder.ino in Arduino IDE.
+
+Select correct board and port, then Upload.
 
 Press the button to input Morse code:
 
-Short press (~<20ms): dot (.)
+Short press (<200ms) → dot (.)
 
-Long press (>200ms): dash (-)
+Long press (>200ms) → dash (-)
 
-Pause briefly between letters (~700ms) to end a letter.
+Pause briefly (~600ms) to end a letter.
 
-Pause longer between words (~1800ms) to add space.
+Pause longer (~1400ms) to add a word space.
 
-Libraries
+📚 Libraries
 
 LiquidCrystal_I2C
- – for I2C LCD control
 
-Install via Arduino IDE Library Manager or manually from GitHub.
+Install via Arduino IDE Library Manager or manually.
 
-Customization
+🔧 Customization
 
 Adjust threshold for analog button reading.
 
-Modify letter and word gap times in holdDuration if your press timing differs.
+Modify letter and word gap durations if timing differs.
 
-Add more Morse symbols (punctuation) by extending the SymbolDecoder() function.
+Extend SymbolDecoder() for punctuation or extra symbols.
 
-Screenshots
+🖼 Screenshots
 
-![Morse-Decoder-Breadboard-implementation.jpg](https://github.com/user-attachments/assets/e08d36a0-9f45-465e-a59e-aee7b8926bb8)
+Include LCD images showing decoded text here.
 
+⚠ Tips for Best Performance
 
-License
+Button press timing: Keep dots short (<200ms) and dashes longer (>200ms).
 
-This project is released under the MIT License. Feel free to use, modify, and share.
+Avoid bouncing: Add a small debounce delay if needed.
 
+Adjust gap times for your speed of input.
+
+📜 License
+
+This project is licensed under the MIT License.
