@@ -7,7 +7,7 @@ Features
 Decode dots (.) and dashes (-) from button input.
 
 Letter and word spacing automatically detected.
-
+			
 Output displayed on a 16x2 I2C LCD, scrolling for long text.
 
 Fast-press reset: rapidly pressing the button 5–7 times clears the display.
